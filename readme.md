@@ -8,7 +8,7 @@ the Udemy course [Building modern web applications in Go](https://www.udemy.com/
 Dependencies:
 
 - [chi router](https://github.com/go-chi/chi)
-- [alex edwards SCS](https://github.com/alexedwards/scs/v2) session management
+- [alex edwards SCS](https://github.com/alexedwards/scs) session management
 - [nosurf](https://github.com/justinas/nosurf)
 - [pgx](https://github.com/jackc/pgx/v4)
 - [simple mail](https://github.com/xhit/go-simple-mail/v2)
