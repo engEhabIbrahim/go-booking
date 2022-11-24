@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/engEhabIbrahim/go-booking/pkg/config"
 	"github.com/engEhabIbrahim/go-booking/pkg/models"
 	"github.com/engEhabIbrahim/go-booking/pkg/render"
@@ -27,7 +28,7 @@ func NewHandlers(r *Repository) {
 func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIp := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remote_ip", remoteIp)
-	render.RenderTemplate(w, "home.page.gohtml", &models.TemplateData{})
+	render.RenderTemplate(w, r, "home.page.gohtml", &models.TemplateData{})
 }
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	// some logic here
@@ -35,7 +36,24 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	stringMap["test"] = "Hello from about page"
 	remoteIp := m.App.Session.GetString(r.Context(), "remote_ip")
 	stringMap["remote_ip"] = remoteIp
-	render.RenderTemplate(w, "about.page.gohtml", &models.TemplateData{
+	render.RenderTemplate(w, r, "about.page.gohtml", &models.TemplateData{
 		StringMap: stringMap,
 	})
+}
+func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "generals.page.gohtml", &models.TemplateData{})
+}
+func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "majors.page.gohtml", &models.TemplateData{})
+}
+func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "search-availability.page.gohtml", &models.TemplateData{})
+}
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
+	start := r.Form.Get("start")
+	end := r.Form.Get("end")
+	w.Write([]byte(fmt.Sprintf("Start date is %s and end date is %s ", start, end)))
+}
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "contact.page.gohtml", &models.TemplateData{})
 }
